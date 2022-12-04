@@ -1,0 +1,29 @@
+GET http://localhost:8000/games
+
+###
+
+GET http://localhost:8000/games/638cdf1073cd377b7b918b71
+
+###
+
+POST http://localhost:8000/games
+Content-Type: application/json
+
+{
+    "title": "The Legend of Zelda: The Minish Cap",
+    "genre": "Action-Adventure"
+}
+
+###
+
+DELETE http://localhost:8000/games/638cdf1073cd377b7b918b71
+
+###
+
+PATCH http://localhost:8000/games/638cdfcb5ae67d13baaba5f5
+Content-Type: application/json
+
+{
+    "title": "The Legend of Zelda: Twilight Princess",
+    "genre": "Action-Adventure"
+}
