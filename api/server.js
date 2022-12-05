@@ -16,8 +16,15 @@ db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to Database'));
 const gameRouter = require('./routes/games');
 
+
 app.use(express.json());
-app.use('/games', gameRouter);
+app.use('/api/v1/games', gameRouter);
+
+app.use(express.static(path.join(__dirname, '../reactjs/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../reactjs/build/', 'index.html'));
+});
 
 app.listen(PORT ,() => {
     console.log(`Server is running on port ${PORT}`);
