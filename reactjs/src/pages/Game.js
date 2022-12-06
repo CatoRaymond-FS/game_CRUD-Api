@@ -122,11 +122,11 @@ function Game() {
             Genre:
             <input type="text" name="genre" value={values.genre} onChange={handleInputChanges} />
         </label>
-        <input type="submit" value="Submit" />
         <label>
             Year:
             <input type="text" name="year" value={values.year} onChange={handleInputChanges} />
         </label>
+        <input type="submit" value="Submit" />
     </form>
 
       </header>
