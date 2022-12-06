@@ -10,7 +10,8 @@ function Game() {
 
   const [values, setValues] = useState({
     title: '',
-    genre: ''
+    genre: '',
+    year: ''
   })
 
   const { id } = useParams();
@@ -40,7 +41,8 @@ function Game() {
             console.log({data})
             setValues({
                 title: data.title,
-                genre: data.genre
+                genre: data.genre,
+                year: data.year
             })
       })
     } catch(error){
@@ -106,6 +108,7 @@ function Game() {
        <h1>Game Profile:</h1>
        <h3>{values && values.title}</h3>
        <h5>{values && values.genre}</h5>
+       <h5>{values && values.year}</h5>
        <button onClick={() => deleteGame()}>Delete Game</button>
         <Link to="/">Home</Link>
         <Link to="/dashboard">Dashboard</Link>
@@ -120,6 +123,10 @@ function Game() {
             <input type="text" name="genre" value={values.genre} onChange={handleInputChanges} />
         </label>
         <input type="submit" value="Submit" />
+        <label>
+            Year:
+            <input type="text" name="year" value={values.year} onChange={handleInputChanges} />
+        </label>
     </form>
 
       </header>
