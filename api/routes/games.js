@@ -38,7 +38,8 @@ router.get('/:id', getGame, async (req, res) => {
 router.post('/', async (req, res) => {
     const game = new Game({
         title: req.body.title,
-        genre: req.body.genre
+        genre: req.body.genre,
+        year: req.body.year
     })
     try {
         const newGame = await game.save();
@@ -56,6 +57,10 @@ router.patch('/:id', getGame, async (req, res) => {
     if(req.body.genre != null) {
         res.game.genre = req.body.genre;
     }
+    if(req.body.year != null) {
+        res.game.year = req.body.year;
+    }
+
     try {
         const updatedGame = await res.game.save();
         res.json(updatedGame);
