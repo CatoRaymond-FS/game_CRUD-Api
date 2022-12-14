@@ -1,5 +1,8 @@
 //use express and router
 const express = require('express');
+const passport = require('passport');
+const passportService = require('../services/passport');
+const protectedRoute = passport.authenticate('jwt', { session: false });
 const router = express.Router();
 
 const Game = require('../models/game');
@@ -20,7 +23,7 @@ const getGame = async (req, res, next) => {
     }
 
 //Get all
-router.get('/', async (req, res) => {
+router.get('/', protectedRoute, async (req, res) => {
     try {
         const games = await Game.find();
         res.json(games);
