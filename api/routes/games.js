@@ -33,7 +33,7 @@ router.get('/', protectedRoute, async (req, res) => {
 })
 
 //Get one
-router.get('/:id', getGame, async (req, res) => {
+router.get('/:id', protectedRoute, getGame, async (req, res) => {
     res.json(res.game);
 })
 
@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
 })
 
 //Patch update
-router.patch('/:id', getGame, async (req, res) => {
+router.patch('/:id',protectedRoute, getGame, async (req, res) => {
     if(req.body.title != null) {
         res.game.title = req.body.title;
     }
@@ -73,7 +73,7 @@ router.patch('/:id', getGame, async (req, res) => {
 })
 
 //Delete
-router.delete('/:id', getGame, async (req, res) => {
+router.delete('/:id',protectedRoute, getGame, async (req, res) => {
     try {
         await res.game.remove();
         res.json({ message: 'Deleted Game' });
