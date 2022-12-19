@@ -15,10 +15,14 @@ const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to Database'));
 const gameRouter = require('./routes/games');
+const authRouter = require('./routes/auth');
+
 
 
 app.use(express.json());
 app.use('/api/v1/games', gameRouter);
+app.use('/api/v1/auth', authRouter);
+
 
 app.use(express.static(path.join(__dirname, '../reactjs/build')));
 

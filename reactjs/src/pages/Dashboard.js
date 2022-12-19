@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import authService from '../services/auth.service';
+import gamesService from '../services/games.service';
 import '../App.css';
 
 function Dashboard() {
@@ -12,6 +14,8 @@ function Dashboard() {
     year: ''
   })
 
+  const navigate = useNavigate();
+
 
   const API_BASE = process.env.NODE_ENV === 'development' 
   ? `http://localhost:8000/api/v1` 
@@ -19,14 +23,27 @@ function Dashboard() {
 
   let ignore = false;
   useEffect(() => {
-
-
-    if(!ignore){
-      getGames();
-    }
-
-    return () => { ignore = true; }
+    gamesService.getAllPrivateGames().then(
+      response => {
+        setGames(response.data);
+      },
+      (error) => {
+        console.log("secured error", error.response);
+        if(error.response && error.response.status === 403){
+          authService.logout();
+          navigate('/login');
+        }
+      }
+    )
   }, [])
+
+
+  //   if(!ignore){
+  //     getGames();
+  //   }
+
+  //   return () => { ignore = true; }
+  // }, [])
 
   const getGames = async () => {
     try{
@@ -42,6 +59,7 @@ function Dashboard() {
       setLoading(false)
     }
   }
+
 
   const createGame = async () => {
     try{
